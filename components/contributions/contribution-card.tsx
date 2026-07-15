@@ -10,6 +10,14 @@ interface ContributionCardProps {
 export default function ContributionCard({
   contributions,
 }: ContributionCardProps) {
+  if (contributions.length === 0) {
+    return (
+      <p className="text-center text-sm text-muted-foreground">
+        No public contributions to show yet — check back soon.
+      </p>
+    );
+  }
+
   return (
     <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
       {contributions.map((contribution, id) => (
