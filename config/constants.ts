@@ -66,7 +66,8 @@ export type ValidSkills =
   | "SQLite"
   | "Adobe XD"
   | "AWS Lambda"
-  | "DynamoDB";
+  | "DynamoDB"
+  | "YOLOv8";
 
 export type ValidCategory =
   | "Full Stack"

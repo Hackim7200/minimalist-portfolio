@@ -105,23 +105,29 @@ export default async function Project({ params }: ProjectPageProps) {
 
       <div className="mb-7 ">
         <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
-          Description
+          Introduction
         </h2>
         {/* {<project.descriptionComponent />} */}
         <ProjectDescription
-          paragraphs={project.descriptionDetails.paragraphs}
-          bullets={project.descriptionDetails.bullets}
+          paragraphs={project.introduction.paragraphs}
+          bullets={project.introduction.bullets}
         />
       </div>
 
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          What it does
-        </h2>
-        {project.whatItDoesArr.map((page, ind) => (
-          <div key={ind}>
+        {project.infoArr.map((page, ind) => (
+          <div className="mb-7 " key={ind}>
+            <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
+              {page.title}
+            </h2>
             <div>
               <p>{page.description}</p>
+              {page.bullets.length > 0 && (
+                <ul className="list-disc pl-6 mt-4">
+                  {page.bullets.map((bullet, ind) => (
+                    <li key={ind}>{bullet}</li>
+                  ))}
+                </ul>
+              )}
               {page.imgArr.map((img, ind) => (
                 <Image
                   src={img}
@@ -136,30 +142,6 @@ export default async function Project({ params }: ProjectPageProps) {
             </div>
           </div>
         ))}
-      </div>
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          How it works
-        </h2>
-        {project.howItWorksArr.map((page, ind) => (
-          <div key={ind}>
-            <div>
-              <p>{page.description}</p>
-              {page.imgArr.map((img, ind) => (
-                <Image
-                  src={img}
-                  key={ind}
-                  alt={img}
-                  width={720}
-                  height={405}
-                  className="my-4 rounded-md border bg-muted transition-colors"
-                  priority
-                />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
 
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">

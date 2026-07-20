@@ -4,6 +4,7 @@ interface SectionInfoInterface {
   title: string;
   imgArr: string[];
   description?: string;
+  bullets: string[];
 }
 
 interface DescriptionDetailsInterface {
@@ -23,9 +24,8 @@ export interface ProjectInterface {
   startDate: Date;
   endDate: Date;
   companyLogoImg: any;
-  descriptionDetails: DescriptionDetailsInterface;
-  whatItDoesArr: SectionInfoInterface[];
-  howItWorksArr: SectionInfoInterface[];
+  introduction: DescriptionDetailsInterface;
+  infoArr: SectionInfoInterface[];
 }
 
 export const Projects: ProjectInterface[] = [
@@ -36,228 +36,150 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2001-01-01"),
     endDate: new Date("2001-01-01"),
     companyLogoImg: "/logo.png",
-
+    
+    
     companyName: "Kinetics",
     category: ["Mobile Dev", "Backend", "Distributed System"],
-
+    
     cardHook:
-      "Offline-first fitness tracker that lets you log workouts without signal and syncs seamlessly across your phone and web app once you're back online.",
-
+    "Offline-first fitness tracker that lets you log workouts without signal and syncs seamlessly across your phone and web app once you're back online.",
+    
     techStack: ["Flutter", "SQLite", "TypeScript", "AWS Lambda", "DynamoDB"],
     // THIS IS THE DESCRIPTION FOR THE PROJECT
-    descriptionDetails: {
+    introduction: {
+      
       paragraphs: [
-        "Kinetics is a fitness application built to help people track their workouts day to day. Designed offline-first with poor gym connectivity in mind, Kinetics lets you log workouts without an internet connection and automatically syncs them once connectivity is restored. Workouts sync seamlessly across multiple phones and the web app, with a future goal of making personal training accessible to everyone. The app provides intuitive analytics that help you track steady progress and flag regression so you always know where you stand.",
+        "Kinetics is a fitness application built to help people track their workouts day to day. Designed offline-first with poor gym connectivity in mind, Kinetics lets you log workouts without an internet connection and automatically syncs them once connectivity is restored. Workouts sync seamlessly across multiple phones and the web app, with a future goal of making personal training accessible to everyone. The app provides intuitive analytics that help you track steady progress and flag regression so you always know where you stand."
       ],
-      bullets: [],
+      bullets: [
+      ],
     },
-    whatItDoesArr: [
+    // the 2 section below can be merged into a reusable section that can be repeated
+    infoArr: [
       {
-        title: "",
-        description:
-          "Offline-first fitness tracker that lets you log workouts without signal and syncs seamlessly across your phone and web app once you're back online.",
+        title: "What It Does",
+        description:"Kinetics is a fitness application built to help people track their workouts day to day. Designed offline-first with poor gym connectivity in mind, Kinetics lets you log workouts without an internet connection and automatically syncs them once connectivity is restored. Workouts sync seamlessly across multiple phones and the web app, with a future goal of making personal training accessible to everyone. The app provides intuitive analytics that help you track steady progress and flag regression so you always know where you stand.",
+        bullets: [
+       
+        ],
         imgArr: [],
       },
-    ],
-    howItWorksArr: [
       {
-        title: "",
-        description:
-          "Workouts are logged to a local SQLite DB first, then queued for sync. Every ~5 minutes the queue is batched and pushed to AWS Lambda, written to DynamoDB, and propagated to your other devices using a last-write-wins conflict policy.",
-        imgArr: [],
+        title: "How It Works",
+        description:"The application application implements the following sync engine architecture with the conflict resolution being last write wins every time user makes changes to their workouts adds or updates it it gets added to the sync queue which keeps track of the updates that need to be pushed to the server. Every interval e.g. 5min sync queue pushes changes in bulk to the server to update the changes. if it synces successfully syncs the queue is emptied and the cycle repeats itself bulk is necessary to reduce the cost of hitting the api endpoint every time changes are added that stacks up the costs",
+        bullets: [
+       
+        ],
+        imgArr: ["/Kinetics/sync_engine.png"],
       },
     ],
   },
+
   {
-    id: "plant-disease-detection",
+    id: "leaf-lens",
     type: "Personal",
     githubLink: "https://github.com/Hackim7200/DiseaseDetectionApp",
     startDate: new Date("2023-09-01"),
     endDate: new Date("2024-05-01"),
     companyLogoImg: "/logo.png",
 
-    companyName: "Plant Disease Detection (Final Year Project, A*)",
-    category: ["Full Stack", "Web Dev", "AI/ML"],
+    companyName: "Leaf Lens",
+    category: ["Web Dev", "Backend", "AI/ML"],
 
     cardHook:
-      "Full-stack web app that detects and classifies plant diseases from leaf images using a custom-trained CNN with object detection and transfer learning.",
+      "Plant disease detection app that identifies issues from a single photo, performing multi-class classification on each leaf to help catch problems early in agriculture.",
 
-    techStack: [
-      "React",
-      "Django",
-      "Python",
-      "TensorFlow",
-      "Keras",
-      "SQL",
-      "Figma",
-    ],
-    descriptionDetails: {
+    techStack: ["React", "Django", "TensorFlow", "YOLOv8"],
+    introduction: {
       paragraphs: [
-        "This final-year project (graded A*) is a full-stack web application that intakes plant images, performs object detection to isolate leaves, removes visual noise, and classifies each isolated image before presenting a summary of the plant's health.",
-        "The frontend was prototyped in Figma and built in React, with a Django backend for storing and displaying detection history, and a CNN trained with TensorFlow/Keras for the core classification task.",
+        "Leaf Lens is a full-stack plant disease detection app built to detect various diseases in plants. The app takes in plant images, performs object detection to isolate leaves, removes visual noise, and classifies each isolated image before presenting a summary of the plant's health. The project utilised and retrained an AlexNet model and a YOLOv8 model on a custom dataset for multi-class classification. The app was designed to reduce plant loss at early stages in agricultural land through easy, accessible detection.",
+        "Photos are captured via phone or camera and sent to a Django backend, which feeds them to a YOLOv8 object detection model (trained on web-scraped leaf images) that isolates each leaf using bounding box coordinates. An AlexNet CNN, trained on a Hugging Face dataset of plant diseases, then classifies each cropped leaf. Results are saved to the database and returned to the user when they view the page.",
       ],
       bullets: [
-        "Developed a full-stack web app performing object detection, noise removal, and disease classification on plant images.",
-        "Prototyped the interface in Figma and implemented it with React for seamless disease detection.",
-        "Built a secure Django backend API for storing and displaying detection result history with a SQL database.",
-        "Developed and trained a Convolutional Neural Network (CNN) using TensorFlow and Keras for plant disease detection.",
-        "Created a labelled dataset using CVAT and applied transfer learning to boost model performance.",
-        "Evaluated and improved the model by comparing performance metrics and tuning hyperparameters.",
+        "Retrained a YOLOv8 object detection model on web-scraped leaf images to isolate leaves via bounding boxes.",
+        "Retrained an AlexNet CNN on a Hugging Face plant disease dataset for multi-class classification.",
+        "Built a full-stack pipeline (React frontend, Django backend) that stores and returns classification results.",
+        "Designed for early, accessible disease detection to help reduce plant loss in agriculture.",
       ],
     },
-    whatItDoesArr: [
+    infoArr: [
       {
-        title: "Detection & Classification Pipeline",
+        title: "What It Does",
         description:
-          "Object detection to isolate leaves, noise removal, and CNN-based classification, summarized in a plant health report.",
-        imgArr: ["/logo.png"],
+          "Leaf Lens is a full-stack plant disease detection app built to detect various diseases in plants. The app takes in plant images, performs object detection to isolate leaves, removes visual noise, and classifies each isolated image before presenting a summary of the plant's health.",
+        bullets: [
+          "Detects and classifies multiple plant diseases from a single photo.",
+          "Isolates leaves via object detection, removes visual noise, then runs multi-class classification.",
+          "Retrained AlexNet and YOLOv8 models on a custom dataset for classification.",
+          "Built to catch problems early and reduce plant loss in agricultural settings.",
+        ],
+        imgArr: [],
+      },
+      {
+        title: "How It Works",
+        description:
+          "The app takes an image captured on your phone or camera and sends it to the backend. The backend feeds it to the YOLOv8 object detection model, trained on web-scraped leaf images, which isolates each leaf using bounding box coordinates. An AlexNet CNN model, trained on a Hugging Face dataset of plant diseases, then classifies each isolated leaf. Results are saved to the database and returned to the user when they view the page.",
+        bullets: [
+          "User captures a photo via phone or camera and uploads it to the backend.",
+          "A YOLOv8 model, trained on web-scraped leaf images, detects and crops each leaf using bounding box coordinates.",
+          "An AlexNet CNN, trained on a Hugging Face plant disease dataset, classifies each cropped leaf.",
+          "Results are saved to the database and returned to the user on the results page.",
+        ],
+        imgArr: [],
       },
     ],
-    howItWorksArr: [],
   },
   {
-    id: "fitness-tracker-web-app",
+    id: "pomodoro-planner",
     type: "Personal",
-    startDate: new Date("2022-01-01"),
-    endDate: new Date("2022-06-01"),
+    startDate: new Date("2026-01-01"),
+    endDate: new Date("2026-07-20"),
     companyLogoImg: "/logo.png",
 
-    companyName: "Fitness Tracker Web App",
-    category: ["Full Stack", "Web Dev"],
+    companyName: "Pomodoro Planner",
+    category: ["Mobile Dev", "Web Dev", "Backend", "Distributed System"],
 
     cardHook:
-      "Full-stack fitness tracking web app with progress visualization, built collaboratively with React, Node.js, and MySQL.",
+      "Minimalist planner that schedules tasks around your circadian rhythm, tracks progress with pomodoros, and counts down to upcoming events on any device.",
 
-    techStack: ["React", "Node.js", "MySQL", "Sass"],
-    descriptionDetails: {
+    techStack: ["Flutter", "Next.js", "SQLite", "TypeScript", "AWS Lambda", "DynamoDB"],
+    introduction: {
       paragraphs: [
-        "A fully functional full-stack web app for tracking fitness progress, built as a group project using React, Node.js, and a MySQL server.",
-        "The team designed use case, class, and sequence diagrams to systematically map user actions and system responses before implementation.",
+        "Pomodoro Planner is a minimalistic mobile and web app used to plan your day using pomodoros. The app is developed with the human energy cycle in mind, following the circadian rhythm, allowing you to schedule your most difficult tasks when your energy and willpower are at their highest (e.g., early hours in the day), and lighter activity as the day moves toward night, so you don't burn out.",
+        "The app features an intuitive pomodoro timer that syncs across devices, so you can seamlessly access your tasks on the web app as well. This allows users to keep track of what they need to do and plan their day on either mobile or desktop.",
       ],
       bullets: [
-        "Developed a fully functional full-stack web app using React, Node.js, and a MySQL server.",
-        "Designed a dynamic, user-friendly interface with React, enhanced with Sass styling.",
-        "Implemented charts to visualize progress, demonstrating data visualization for effective user feedback.",
-        "Used GitHub for version control and to synchronize group work.",
-        "Designed use case, class, and sequence diagrams to outline user-system interactions.",
+        "Schedules tasks around your circadian rhythm, front-loading demanding work into your highest-energy hours.",
+        "Pomodoro timer syncs in real time across mobile and web.",
+        "Counts down to upcoming events alongside your daily task list.",
+        "Plan on one device, execute on another — tasks and progress stay in sync everywhere.",
       ],
     },
-    whatItDoesArr: [
+    infoArr: [
       {
-        title: "Progress Visualization",
+        title: "What It Does",
         description:
-          "Charts visualizing user progress, built with React and styled with Sass.",
-        imgArr: ["/logo.png"],
+          "A minimalistic mobile and web app for planning your day around pomodoros and your circadian rhythm — scheduling demanding tasks for your highest-energy hours and lighter activity as the day winds down.",
+        bullets: [
+          "Schedules your most difficult tasks for peak-energy hours and lighter tasks later in the day.",
+          "Built-in pomodoro timer to track focused work sessions.",
+          "Counts down to upcoming events so nothing sneaks up on you.",
+          "Works equally well on mobile or desktop.",
+        ],
+        imgArr: [],
+      },
+      {
+        title: "How It Works",
+        description:
+          "Plan your day on your laptop, then tick off tasks as you go from your phone (or vice versa) using an intuitive, Pomofocus-inspired timer that keeps you engaged and motivated to complete your tasks.",
+        bullets: [
+          "Log in on the web app to plan and organize your day.",
+          "Pick up where you left off on mobile, and vice versa — progress stays synced.",
+          "A Pomofocus-inspired timer keeps focus sessions structured and motivating.",
+        ],
+        imgArr: [],
       },
     ],
-    howItWorksArr: [],
-  },
-  {
-    id: "injury-prevention-app",
-    type: "Personal",
-    githubLink: "https://github.com/Hackim7200/Kinetics_v2",
-    startDate: new Date("2025-06-01"),
-    endDate: new Date("2026-07-13"),
-    companyLogoImg: "/logo.png",
-
-    companyName: "Injury Prevention & Progressive Overload",
-    category: ["Mobile Dev", "UI/UX"],
-
-    cardHook:
-      "Flutter mobile app helping athletes manage progressive overload and avoid injury, with SQLite-backed routine and progression tracking.",
-
-    techStack: ["Flutter", "Dart", "SQLite"],
-    descriptionDetails: {
-      paragraphs: [
-        "A mobile application built in Flutter to help athletes manage progressive overload and prevent injury.",
-        "Routines, exercises, and progression data are stored in SQLite, driving a data representation view that flags when a muscle group risks overtraining.",
-      ],
-      bullets: [
-        "Designed and developed a Flutter mobile app to assist athletes with progressive overload and injury prevention.",
-        "Used an SQLite database to represent users' routines, exercises, and progression data.",
-        "Applied UX design principles to ensure ease of use for end users.",
-        "Built a data representation section surfacing overtraining risk per muscle group.",
-        "Tested the app on physical devices to verify UI compatibility.",
-      ],
-    },
-    whatItDoesArr: [
-      {
-        title: "Overtraining Insights",
-        description:
-          "Aesthetic data representation showing whether a muscle group is being overtrained, reducing injury risk.",
-        imgArr: ["/logo.png"],
-      },
-    ],
-    howItWorksArr: [],
-  },
-  {
-    id: "daily-planner-countdown-app",
-    type: "Personal",
-    startDate: new Date("2022-09-01"),
-    endDate: new Date("2023-01-01"),
-    companyLogoImg: "/logo.png",
-
-    companyName: "Daily Productivity Planner & Event Countdown",
-    category: ["Mobile Dev", "UI/UX"],
-
-    cardHook:
-      "Flutter mobile app for daily planning and event countdowns, with SQL-backed storage and due-date notifications.",
-
-    techStack: ["Flutter", "Dart", "SQL"],
-    descriptionDetails: {
-      paragraphs: [
-        "A Flutter mobile app for planning out the day and keeping track of important upcoming events.",
-        "Task and event data is stored in a SQL database, with alerts notifying the user as an event's due date approaches.",
-      ],
-      bullets: [
-        "Developed a Flutter mobile app for daily planning and tracking future events.",
-        "Designed a user-friendly interface that makes the platform easy to understand.",
-        "Used a SQL database to store data relating to tasks and events.",
-        "Implemented alerts notifying the user as an event's due date approaches.",
-      ],
-    },
-    whatItDoesArr: [
-      {
-        title: "Planning & Countdown",
-        description:
-          "Day planning combined with countdowns to upcoming events, with due-date alerts.",
-        imgArr: ["/logo.png"],
-      },
-    ],
-    howItWorksArr: [],
-  },
-  {
-    id: "eight-queens-simulated-annealing",
-    type: "Personal",
-    startDate: new Date("2021-10-01"),
-    endDate: new Date("2021-12-01"),
-    companyLogoImg: "/logo.png",
-
-    companyName: "8 Queens Problem — Simulated Annealing",
-    category: ["AI/ML"],
-
-    cardHook:
-      "Simulated Annealing algorithm solving the 8 Queens problem, with a custom fitness function for solution quality.",
-
-    techStack: ["Python"],
-    descriptionDetails: {
-      paragraphs: [
-        "A Simulated Annealing algorithm developed to solve the classic 8 Queens problem, showcasing algorithmic design and optimization.",
-      ],
-      bullets: [
-        "Developed a Simulated Annealing algorithm to solve the 8 Queens problem.",
-        "Implemented a fitness function to evaluate the quality of solutions generated by the algorithm.",
-      ],
-    },
-    whatItDoesArr: [
-      {
-        title: "Algorithm Design",
-        description:
-          "Simulated Annealing search with a fitness function evaluating candidate board states.",
-        imgArr: ["/logo.png"],
-      },
-    ],
-    howItWorksArr: [],
   },
 ];
 
