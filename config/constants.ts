@@ -6,7 +6,7 @@ export type ValidSkills =
   | "express.js"
   | "Node.js"
   | "MongoDB"
-  | "Typescript"
+  | "TypeScript"
   | "Javascript"
   | "HTML 5"
   | "CSS 3"
@@ -64,7 +64,9 @@ export type ValidSkills =
   | "Linux"
   | "Keras"
   | "SQLite"
-  | "Adobe XD";
+  | "Adobe XD"
+  | "AWS Lambda"
+  | "DynamoDB";
 
 export type ValidCategory =
   | "Full Stack"
@@ -74,7 +76,8 @@ export type ValidCategory =
   | "Web Dev"
   | "Mobile Dev"
   | "3D Modeling"
-  | "AI/ML";
+  | "AI/ML"
+  | "Distributed System";
 
 export type ValidExpType = "Personal" | "Professional";
 

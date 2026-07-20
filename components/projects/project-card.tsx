@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.companyName}
         </h5>
         <p className="line-clamp-3 font-normal text-muted-foreground flex-grow">
-          {project.shortDescription}
+          {project.cardHook}
         </p>
         <div className="flex gap-2 flex-wrap">
           <ChipContainer textArr={project.category} />

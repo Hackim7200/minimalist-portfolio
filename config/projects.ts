@@ -1,6 +1,6 @@
 import { ValidCategory, ValidExpType, ValidSkills } from "./constants";
 
-interface PagesInfoInterface {
+interface SectionInfoInterface {
   title: string;
   imgArr: string[];
   description?: string;
@@ -16,7 +16,7 @@ export interface ProjectInterface {
   type: ValidExpType;
   companyName: string;
   category: ValidCategory[];
-  shortDescription: string;
+  cardHook: string;
   websiteLink?: string;
   githubLink?: string;
   techStack: ValidSkills[];
@@ -24,62 +24,72 @@ export interface ProjectInterface {
   endDate: Date;
   companyLogoImg: any;
   descriptionDetails: DescriptionDetailsInterface;
-  pagesInfoArr: PagesInfoInterface[];
+  whatItDoesArr: SectionInfoInterface[];
+  howItWorksArr: SectionInfoInterface[];
 }
 
 export const Projects: ProjectInterface[] = [
   {
-    id: "circadian-planner",
-    companyName: "Circadian Planner",
+    id: "kinetics",
     type: "Personal",
-    category: ["Mobile Dev", "Full Stack", "Web Dev"],
-    shortDescription:
-      "Cross-platform productivity app that schedules tasks around users' natural circadian energy cycles, backed by a serverless AWS architecture.",
     githubLink: "https://github.com/Hackim7200/event_countdown_Project_2026",
-    techStack: ["Flutter", "Dart", "Typescript", "AWS"],
-    startDate: new Date("2025-10-01"),
-    endDate: new Date("2026-04-13"),
+    startDate: new Date("2001-01-01"),
+    endDate: new Date("2001-01-01"),
     companyLogoImg: "/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Cross-Platform Scheduling",
-        description:
-          "Native mobile experience via Flutter alongside a responsive web interface, sharing state across devices in real time.",
-        imgArr: ["/logo.png"],
-      },
-    ],
+
+    companyName: "Kinetics",
+    category: ["Mobile Dev", "Backend", "Distributed System"],
+
+    cardHook:
+      "Offline-first fitness tracker that lets you log workouts without signal and syncs seamlessly across your phone and web app once you're back online.",
+
+    techStack: ["Flutter", "SQLite", "TypeScript", "AWS Lambda", "DynamoDB"],
+    // THIS IS THE DESCRIPTION FOR THE PROJECT
     descriptionDetails: {
       paragraphs: [
-        "Circadian Planner is a productivity optimization platform that leverages circadian rhythm research to intelligently schedule tasks based on a user's natural energy cycles throughout the day.",
-        "It runs on a scalable serverless AWS backend and delivers a consistent experience across native mobile and responsive web clients, with offline-first data handling for uninterrupted use.",
+        "Kinetics is a fitness application built to help people track their workouts day to day. Designed offline-first with poor gym connectivity in mind, Kinetics lets you log workouts without an internet connection and automatically syncs them once connectivity is restored. Workouts sync seamlessly across multiple phones and the web app, with a future goal of making personal training accessible to everyone. The app provides intuitive analytics that help you track steady progress and flag regression so you always know where you stand.",
       ],
-      bullets: [
-        "Architected a productivity platform that schedules tasks based on users' natural circadian energy cycles.",
-        "Built a scalable serverless backend using AWS Cognito for authentication, DynamoDB for data persistence, and AWS Lambda for API endpoints.",
-        "Implemented cross-platform architecture delivering a native mobile experience via Flutter and a responsive web interface with shared data state.",
-        "Integrated REST APIs for real-time synchronization between platforms and implemented offline-first data handling.",
-      ],
+      bullets: [],
     },
+    whatItDoesArr: [
+      {
+        title: "",
+        description:
+          "Offline-first fitness tracker that lets you log workouts without signal and syncs seamlessly across your phone and web app once you're back online.",
+        imgArr: [],
+      },
+    ],
+    howItWorksArr: [
+      {
+        title: "",
+        description:
+          "Workouts are logged to a local SQLite DB first, then queued for sync. Every ~5 minutes the queue is batched and pushed to AWS Lambda, written to DynamoDB, and propagated to your other devices using a last-write-wins conflict policy.",
+        imgArr: [],
+      },
+    ],
   },
   {
     id: "plant-disease-detection",
-    companyName: "Plant Disease Detection (Final Year Project, A*)",
     type: "Personal",
-    category: ["Full Stack", "Web Dev", "AI/ML"],
-    shortDescription:
-      "Full-stack web app that detects and classifies plant diseases from leaf images using a custom-trained CNN with object detection and transfer learning.",
     githubLink: "https://github.com/Hackim7200/DiseaseDetectionApp",
-    techStack: ["React", "Django", "Python", "TensorFlow", "Keras", "SQL", "Figma"],
     startDate: new Date("2023-09-01"),
     endDate: new Date("2024-05-01"),
     companyLogoImg: "/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Detection & Classification Pipeline",
-        description:
-          "Object detection to isolate leaves, noise removal, and CNN-based classification, summarized in a plant health report.",
-        imgArr: ["/logo.png"],
-      },
+
+    companyName: "Plant Disease Detection (Final Year Project, A*)",
+    category: ["Full Stack", "Web Dev", "AI/ML"],
+
+    cardHook:
+      "Full-stack web app that detects and classifies plant diseases from leaf images using a custom-trained CNN with object detection and transfer learning.",
+
+    techStack: [
+      "React",
+      "Django",
+      "Python",
+      "TensorFlow",
+      "Keras",
+      "SQL",
+      "Figma",
     ],
     descriptionDetails: {
       paragraphs: [
@@ -95,26 +105,30 @@ export const Projects: ProjectInterface[] = [
         "Evaluated and improved the model by comparing performance metrics and tuning hyperparameters.",
       ],
     },
-  },
-  {
-    id: "fitness-tracker-web-app",
-    companyName: "Fitness Tracker Web App",
-    type: "Personal",
-    category: ["Full Stack", "Web Dev"],
-    shortDescription:
-      "Full-stack fitness tracking web app with progress visualization, built collaboratively with React, Node.js, and MySQL.",
-    techStack: ["React", "Node.js", "MySQL", "Sass"],
-    startDate: new Date("2022-01-01"),
-    endDate: new Date("2022-06-01"),
-    companyLogoImg: "/logo.png",
-    pagesInfoArr: [
+    whatItDoesArr: [
       {
-        title: "Progress Visualization",
+        title: "Detection & Classification Pipeline",
         description:
-          "Charts visualizing user progress, built with React and styled with Sass.",
+          "Object detection to isolate leaves, noise removal, and CNN-based classification, summarized in a plant health report.",
         imgArr: ["/logo.png"],
       },
     ],
+    howItWorksArr: [],
+  },
+  {
+    id: "fitness-tracker-web-app",
+    type: "Personal",
+    startDate: new Date("2022-01-01"),
+    endDate: new Date("2022-06-01"),
+    companyLogoImg: "/logo.png",
+
+    companyName: "Fitness Tracker Web App",
+    category: ["Full Stack", "Web Dev"],
+
+    cardHook:
+      "Full-stack fitness tracking web app with progress visualization, built collaboratively with React, Node.js, and MySQL.",
+
+    techStack: ["React", "Node.js", "MySQL", "Sass"],
     descriptionDetails: {
       paragraphs: [
         "A fully functional full-stack web app for tracking fitness progress, built as a group project using React, Node.js, and a MySQL server.",
@@ -128,27 +142,31 @@ export const Projects: ProjectInterface[] = [
         "Designed use case, class, and sequence diagrams to outline user-system interactions.",
       ],
     },
-  },
-  {
-    id: "injury-prevention-app",
-    companyName: "Injury Prevention & Progressive Overload",
-    type: "Personal",
-    category: ["Mobile Dev", "UI/UX"],
-    shortDescription:
-      "Flutter mobile app helping athletes manage progressive overload and avoid injury, with SQLite-backed routine and progression tracking.",
-    githubLink: "https://github.com/Hackim7200/Kinetics_v2",
-    techStack: ["Flutter", "Dart", "SQLite"],
-    startDate: new Date("2025-06-01"),
-    endDate: new Date("2026-07-13"),
-    companyLogoImg: "/logo.png",
-    pagesInfoArr: [
+    whatItDoesArr: [
       {
-        title: "Overtraining Insights",
+        title: "Progress Visualization",
         description:
-          "Aesthetic data representation showing whether a muscle group is being overtrained, reducing injury risk.",
+          "Charts visualizing user progress, built with React and styled with Sass.",
         imgArr: ["/logo.png"],
       },
     ],
+    howItWorksArr: [],
+  },
+  {
+    id: "injury-prevention-app",
+    type: "Personal",
+    githubLink: "https://github.com/Hackim7200/Kinetics_v2",
+    startDate: new Date("2025-06-01"),
+    endDate: new Date("2026-07-13"),
+    companyLogoImg: "/logo.png",
+
+    companyName: "Injury Prevention & Progressive Overload",
+    category: ["Mobile Dev", "UI/UX"],
+
+    cardHook:
+      "Flutter mobile app helping athletes manage progressive overload and avoid injury, with SQLite-backed routine and progression tracking.",
+
+    techStack: ["Flutter", "Dart", "SQLite"],
     descriptionDetails: {
       paragraphs: [
         "A mobile application built in Flutter to help athletes manage progressive overload and prevent injury.",
@@ -162,26 +180,30 @@ export const Projects: ProjectInterface[] = [
         "Tested the app on physical devices to verify UI compatibility.",
       ],
     },
-  },
-  {
-    id: "daily-planner-countdown-app",
-    companyName: "Daily Productivity Planner & Event Countdown",
-    type: "Personal",
-    category: ["Mobile Dev", "UI/UX"],
-    shortDescription:
-      "Flutter mobile app for daily planning and event countdowns, with SQL-backed storage and due-date notifications.",
-    techStack: ["Flutter", "Dart", "SQL"],
-    startDate: new Date("2022-09-01"),
-    endDate: new Date("2023-01-01"),
-    companyLogoImg: "/logo.png",
-    pagesInfoArr: [
+    whatItDoesArr: [
       {
-        title: "Planning & Countdown",
+        title: "Overtraining Insights",
         description:
-          "Day planning combined with countdowns to upcoming events, with due-date alerts.",
+          "Aesthetic data representation showing whether a muscle group is being overtrained, reducing injury risk.",
         imgArr: ["/logo.png"],
       },
     ],
+    howItWorksArr: [],
+  },
+  {
+    id: "daily-planner-countdown-app",
+    type: "Personal",
+    startDate: new Date("2022-09-01"),
+    endDate: new Date("2023-01-01"),
+    companyLogoImg: "/logo.png",
+
+    companyName: "Daily Productivity Planner & Event Countdown",
+    category: ["Mobile Dev", "UI/UX"],
+
+    cardHook:
+      "Flutter mobile app for daily planning and event countdowns, with SQL-backed storage and due-date notifications.",
+
+    techStack: ["Flutter", "Dart", "SQL"],
     descriptionDetails: {
       paragraphs: [
         "A Flutter mobile app for planning out the day and keeping track of important upcoming events.",
@@ -194,26 +216,30 @@ export const Projects: ProjectInterface[] = [
         "Implemented alerts notifying the user as an event's due date approaches.",
       ],
     },
-  },
-  {
-    id: "eight-queens-simulated-annealing",
-    companyName: "8 Queens Problem — Simulated Annealing",
-    type: "Personal",
-    category: ["AI/ML"],
-    shortDescription:
-      "Simulated Annealing algorithm solving the 8 Queens problem, with a custom fitness function for solution quality.",
-    techStack: ["Python"],
-    startDate: new Date("2021-10-01"),
-    endDate: new Date("2021-12-01"),
-    companyLogoImg: "/logo.png",
-    pagesInfoArr: [
+    whatItDoesArr: [
       {
-        title: "Algorithm Design",
+        title: "Planning & Countdown",
         description:
-          "Simulated Annealing search with a fitness function evaluating candidate board states.",
+          "Day planning combined with countdowns to upcoming events, with due-date alerts.",
         imgArr: ["/logo.png"],
       },
     ],
+    howItWorksArr: [],
+  },
+  {
+    id: "eight-queens-simulated-annealing",
+    type: "Personal",
+    startDate: new Date("2021-10-01"),
+    endDate: new Date("2021-12-01"),
+    companyLogoImg: "/logo.png",
+
+    companyName: "8 Queens Problem — Simulated Annealing",
+    category: ["AI/ML"],
+
+    cardHook:
+      "Simulated Annealing algorithm solving the 8 Queens problem, with a custom fitness function for solution quality.",
+
+    techStack: ["Python"],
     descriptionDetails: {
       paragraphs: [
         "A Simulated Annealing algorithm developed to solve the classic 8 Queens problem, showcasing algorithmic design and optimization.",
@@ -223,6 +249,15 @@ export const Projects: ProjectInterface[] = [
         "Implemented a fitness function to evaluate the quality of solutions generated by the algorithm.",
       ],
     },
+    whatItDoesArr: [
+      {
+        title: "Algorithm Design",
+        description:
+          "Simulated Annealing search with a fitness function evaluating candidate board states.",
+        imgArr: ["/logo.png"],
+      },
+    ],
+    howItWorksArr: [],
   },
 ];
 

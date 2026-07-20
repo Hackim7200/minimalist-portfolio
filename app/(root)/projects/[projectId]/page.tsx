@@ -116,13 +116,33 @@ export default async function Project({ params }: ProjectPageProps) {
 
       <div className="mb-7 ">
         <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          Page Info
+          What it does
         </h2>
-        {project.pagesInfoArr.map((page, ind) => (
+        {project.whatItDoesArr.map((page, ind) => (
           <div key={ind}>
-            <h3 className="flex items-center font-heading text-xl leading-tight lg:text-xl mt-3">
-              <Icons.star className="h-5 w-5 mr-2" /> {page.title}
-            </h3>
+            <div>
+              <p>{page.description}</p>
+              {page.imgArr.map((img, ind) => (
+                <Image
+                  src={img}
+                  key={ind}
+                  alt={img}
+                  width={720}
+                  height={405}
+                  className="my-4 rounded-md border bg-muted transition-colors"
+                  priority
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mb-7 ">
+        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
+          How it works
+        </h2>
+        {project.howItWorksArr.map((page, ind) => (
+          <div key={ind}>
             <div>
               <p>{page.description}</p>
               {page.imgArr.map((img, ind) => (

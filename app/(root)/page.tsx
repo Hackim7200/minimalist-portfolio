@@ -26,7 +26,7 @@ import profileImg from "@/public/profile-img.jpg";
 export const metadata: Metadata = {
   title: `${pagesConfig.home.metadata.title}`,
   description:
-    "Hikmatullah Hakim -  DevOps Engineer working at the intersection of DevOps, data, and scalable software systems. Explore my projects, experience, and contributions.",
+    "Hi, I’m Hikmat — I turn complex systems and ideas into reliable, scalable platforms from architecture to production.",
   alternates: {
     canonical: siteConfig.url,
   },
@@ -104,8 +104,8 @@ export default function IndexPage() {
           </AnimatedText>
           <div className="mt-4 max-w-[42rem] text-center">
             <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-              Software engineer working at the intersection of DevOps, data, and
-              scalable software systems.
+              Hi, I&apos;m Hikmat. I turn complex systems and ideas into
+              reliable, scalable platforms from architecture to production.
             </p>
           </div>
 
